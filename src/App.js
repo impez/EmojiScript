@@ -1,23 +1,77 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+
+const dictionary = {
+  "🐶": "const",
+  // "🐱": "let",
+  // "🐭": "var",
+  // "🐹": "import",
+  // "🐰": "from",
+  // "🦊": "function",
+  // "🐻": "if",
+  // "🐼": "else",
+  // "🐨": "while",
+  // "🐯": "for",
+  // "🦁": "switch",
+  // "🐮": "case",
+  // "🐷": "break",
+  // "🐸": "return",
+  // "🐵": "default",
+  // "🦋": "constructor",
+  // "🐢": "this",
+  // "🐔": "try",
+  // "🐧": "catch",
+  // "🐦": "do",
+  // "🐤": "async",
+  // "🐺": "await",
+  // "🐗": "typeof",
+  // "🐴": "class",
+  // "🦄": "new",
+  "🍏": "+",
+  // "🍎": "-",
+  // "🍊": "*",
+  // "🍋": "/",
+  // "🍌": "&",
+  // "🍉": "|",
+  // "🍇": "<",
+  // "🍓": ">",
+  // "🍑": "=",
+  // "🍈": "!",
+  // "🍒": "?",
+  // "🍆": "null",
+};
 
 function App() {
+  const [input, setInput] = useState("");
+  const [output, setOutput] = useState("No output.");
+
+  const compile = (str) => {
+    console.log(Object.entries(dictionary));
+    let expression = "";
+
+    Object.entries(dictionary).forEach(([k, v]) => {
+      console.log(k, v);
+      expression = input.replaceAll(k, v);
+
+      console.log({ expression });
+    });
+
+    const result = new Function(expression)();
+    console.log(result);
+    setOutput(result);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h2>EmojiScript</h2>
+      <textarea
+        value={input}
+        onChange={(e) => {
+          setInput(e.target.value);
+        }}
+      ></textarea>
+      <button onClick={compile}>Compile and run</button>
+      <div className="output">Output:</div>
+      <p>{output}</p>
     </div>
   );
 }
