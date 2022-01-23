@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/emojishit/static/css/main.1ec858c2.css",
+    "main.js": "/emojishit/static/js/main.07c1f717.js",
+    "index.html": "/emojishit/index.html",
+    "main.1ec858c2.css.map": "/emojishit/static/css/main.1ec858c2.css.map",
+    "main.07c1f717.js.map": "/emojishit/static/js/main.07c1f717.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1ec858c2.css",
+    "static/js/main.07c1f717.js"
+  ]
+}
