@@ -43,6 +43,7 @@ const dictionary = {
 function App() {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("No output.");
+  const [error, setError] = useState("");
 
   const compile = (str) => {
     let expression = str;
@@ -51,8 +52,20 @@ function App() {
       expression = expression.replaceAll(k, v);
     });
 
-    const result = new Function(expression)();
-    setOutput(result);
+    try {
+      const result = new Function(expression)();
+
+      const last = expression.split(";")[expression.split(";").length - 2];
+      if (!last?.includes("return")) {
+        setError("Code snippet must end with a return.");
+      } else {
+        setError("");
+      }
+
+      setOutput(result);
+    } catch (e) {
+      setError(e.message);
+    }
   };
 
   return (
@@ -73,6 +86,7 @@ function App() {
       </button>
       <div className="output">Output:</div>
       <p>{output}</p>
+      <p className="error">{error}</p>
     </div>
   );
 }

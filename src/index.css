@@ -32,3 +32,16 @@ code {
 .container > * {
   margin-bottom: 10px;
 }
+
+.error {
+  color: rgb(230, 0, 0);
+  font-size: 10px;
+}
+
+textarea {
+  font-family: Consolas;
+  resize: none;
+  min-height: 300px;
+  background: rgb(40, 32, 49);
+  color: rgb(253, 255, 137);
+}
