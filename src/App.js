@@ -48,11 +48,14 @@ function App() {
   const compile = (str) => {
     let expression = str;
 
-    Object.entries(dictionary).forEach(([k, v]) => {
-      expression = expression.replaceAll(k, v);
-    });
-
     try {
+      Object.entries(dictionary).forEach(([k, v]) => {
+        if (expression.includes(v))
+          throw new Error(`You should use ${k} instead of ${v}`);
+
+        expression = expression.replaceAll(k, v);
+      });
+
       const result = new Function(expression)();
 
       const last = expression.split(";")[expression.split(";").length - 2];
