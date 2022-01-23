@@ -46,17 +46,19 @@ function App() {
 
   const compile = (str) => {
     console.log(Object.entries(dictionary));
-    let expression = "";
+    let expression = str;
 
     Object.entries(dictionary).forEach(([k, v]) => {
       console.log(k, v);
-      expression = input.replaceAll(k, v);
+      expression = expression.replaceAll(k, v);
 
-      console.log({ expression });
+      // console.log({ expression });
     });
 
+    console.log("EXPRESSION:", expression);
+
     const result = new Function(expression)();
-    console.log(result);
+    // console.log(result);
     setOutput(result);
   };
 
@@ -69,7 +71,13 @@ function App() {
           setInput(e.target.value);
         }}
       ></textarea>
-      <button onClick={compile}>Compile and run</button>
+      <button
+        onClick={() => {
+          compile(input);
+        }}
+      >
+        Compile and run
+      </button>
       <div className="output">Output:</div>
       <p>{output}</p>
     </div>
